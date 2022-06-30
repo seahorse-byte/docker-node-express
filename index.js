@@ -7,5 +7,5 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("<h1>HEY THERE DOCKERSSSS</h1>");
+  res.send("<h1>HEY THERE DOCKER</h1>");
 });
