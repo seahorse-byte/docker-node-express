@@ -4,3 +4,4 @@
 [express-sessions]
 [mongoose]
 [bcryptjs]
+[nginx]

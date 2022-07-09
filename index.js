@@ -47,7 +47,8 @@ const postRouter = require("./routes/postsRoutes");
 const userRouter = require("./routes/userRoutes");
 
 const app = express();
-app.use(express.json());
+
+app.enable("trust proxy");
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
@@ -61,11 +62,14 @@ app.use(
     },
   })
 );
-app.get("/", (req, res) => {
-  res.send("<h1>multiple@@ docker files!!</h1>");
-});
+app.use(express.json());
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/users", userRouter);
+
+app.get("/api/v1", (req, res) => {
+  console.log("YEP IT RAN");
+  res.send("<h1>multiple@@ docker files!!</h1>");
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
