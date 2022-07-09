@@ -1,6 +1,7 @@
 // import express
 const express = require("express");
 const postController = require("../controllers/postControllers");
+const protect = require("../middleware/authMiddleware");
 
 // create a router
 const router = express.Router();
@@ -9,7 +10,7 @@ const router = express.Router();
 router
   .route("/")
   .get(postController.getAllPosts)
-  .post(postController.createPost);
+  .post(protect, postController.createPost);
 
 router
   .route("/:id")

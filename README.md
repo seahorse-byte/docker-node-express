@@ -1,0 +1,6 @@
+[express]
+[redis]
+[connect-redis]
+[express-sessions]
+[mongoose]
+[bcryptjs]

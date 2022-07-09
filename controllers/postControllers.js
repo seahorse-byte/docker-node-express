@@ -35,7 +35,6 @@ exports.getOnePost = async (req, res, next) => {
 
 // create a new post
 exports.createPost = async (req, res, next) => {
-  console.log("req.body", req.body);
   try {
     const post = await Post.create(req.body);
     res.status(201).json({

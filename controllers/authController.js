@@ -13,7 +13,44 @@ exports.signup = async (req, res, next) => {
       password: hashpasword,
     });
 
+    req.session.user = user;
+
     res.status(201).json({
+      status: "success",
+      data: { user },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+exports.login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(400).json({
+        status: "fail",
+        message: "User Not found",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid password",
+      });
+    }
+
+    req.session.user = user;
+    res.status(200).json({
       status: "success",
       data: { user },
     });
